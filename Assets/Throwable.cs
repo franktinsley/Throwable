@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -38,13 +37,15 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	#region Unity Callbacks
 
+	#if UNITY_EDITOR
+
 	void Reset()
 	{
-		EditorApplication.ExecuteMenuItem( "GameObject/UI/Event System" );
+		UnityEditor.EditorApplication.ExecuteMenuItem( "GameObject/UI/Event System" );
 
 		if( Camera.main == null )
 		{
-			EditorApplication.ExecuteMenuItem( "GameObject/Camera" );
+			UnityEditor.EditorApplication.ExecuteMenuItem( "GameObject/Camera" );
 			Camera mainCamera = FindObjectOfType<Camera>();
 			mainCamera.name = "Main Camera";
 			mainCamera.tag = "MainCamera";
@@ -56,6 +57,8 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			mainCameraGameObject.AddComponent<PhysicsRaycaster>();
 		}
 	}
+
+	#endif
 
 	void Start()
 	{
