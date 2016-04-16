@@ -128,7 +128,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			transform.position = newFramePosition;
 
 			m_ThrowFrames.Add( new ThrowFrame( newFramePosition, Time.time ) );
-			if( m_ThrowFrames.Count > m_MaximumThrowFramesCount )
+			while( m_ThrowFrames.Count > m_MaximumThrowFramesCount )
 			{
 				m_ThrowFrames.RemoveAt( 0 );
 			}
