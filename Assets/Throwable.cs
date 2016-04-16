@@ -17,7 +17,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 	Collider m_Collider;
 	Bounds m_ColliderBounds;
 	Rigidbody m_Rigidbody;
-	readonly List<ThrowFrame> m_ThrowFrames = new List<ThrowFrame>();
+	List<ThrowFrame> m_ThrowFrames = new List<ThrowFrame>();
 	const int m_MaximumThrowFramesCount = 4;
 
 	#endregion
@@ -168,10 +168,11 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	#region Helpers
 
+	[System.Serializable]
 	struct ThrowFrame
 	{
-		public readonly Vector3 position;
-		public readonly float time;
+		public Vector3 position;
+		public float time;
 
 		public ThrowFrame( Vector3 position, float time )
 		{
