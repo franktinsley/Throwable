@@ -8,7 +8,8 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 {
 	#region Public Fields
 
-	public float maxThrowMagnitude = Mathf.Infinity;
+	[ Tooltip( "Sets a maximum throw force magnitude." ) ]
+	public float m_MaximumForce = Mathf.Infinity;
 
 	#endregion
 
@@ -39,7 +40,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	#if UNITY_EDITOR
 
-	void Reset()
+	public void Reset()
 	{
 		UnityEditor.EditorApplication.ExecuteMenuItem( "GameObject/UI/Event System" );
 
@@ -60,7 +61,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	#endif
 
-	void Start()
+	public void Start()
 	{
 		m_Collider = GetComponent<Collider>();
 		m_ColliderBounds = m_Collider.bounds;
@@ -155,10 +156,10 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 		force = delta.position / delta.time;
 
-		if( force.magnitude > maxThrowMagnitude )
+		if( force.magnitude > m_MaximumForce )
 		{
 			force.Normalize();
-			force *= maxThrowMagnitude;
+			force *= m_MaximumForce;
 		}
 
 		return true;
