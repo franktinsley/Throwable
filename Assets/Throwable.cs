@@ -107,10 +107,10 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 	void Throw()
 	{
-		Vector3 force;
-		if( ThrowForce( out force ) )
+		Vector3? force = ThrowForce();
+		if( force.HasValue )
 		{
-			m_Rigidbody.AddForce( force, ForceMode.VelocityChange );
+			m_Rigidbody.AddForce( force.Value, ForceMode.VelocityChange );
 		}
 
 		m_ThrowFrames.Clear();
@@ -136,13 +136,11 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 		}
 	}
 
-	bool ThrowForce( out Vector3 force )
+	Vector3? ThrowForce()
 	{
-		force = Vector3.zero;
-
 		if( m_ThrowFrames.Count < 2 )
 		{
-			return false;
+			return null;
 		}
 
 		ThrowFrame startFrame = m_ThrowFrames[ 0 ];
@@ -151,10 +149,10 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
 		if( Mathf.Approximately( delta.time, 0f ) )
 		{
-			return false;
+			return null;
 		}
 
-		force = delta.position / delta.time;
+		Vector3 force = delta.position / delta.time;
 
 		if( force.magnitude > m_MaximumForce )
 		{
@@ -162,7 +160,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			force *= m_MaximumForce;
 		}
 
-		return true;
+		return force;
 	}
 
 	#endregion
