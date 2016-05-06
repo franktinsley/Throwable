@@ -9,7 +9,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 	#region Public Fields
 
 	[ Tooltip( "Sets a maximum throw force magnitude." ) ]
-	public float m_MaximumForce = Mathf.Infinity;
+	[ SerializeField ] float m_MaximumForce = Mathf.Infinity;
 
 	#endregion
 
