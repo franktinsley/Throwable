@@ -137,7 +137,7 @@ public class Throwable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 			Vector3 offset = pointerCurrentRaycast.worldNormal * m_ColliderBounds.extents.magnitude;
 			Vector3 newFramePosition = raycastHitPosition + offset;
 
-			// Actuallt move object to new offset position.
+			// Actually move object to new offset position.
 			transform.position = newFramePosition;
 
 			// Store new position and time.
